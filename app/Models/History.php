@@ -12,4 +12,9 @@ class History extends Model
     protected $fillable = [
         'user_id', 'longtitude', 'latitude',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
