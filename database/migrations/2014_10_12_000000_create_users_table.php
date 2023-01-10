@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->enum('gender', ['L', 'P']);
+            $table->string('no_hp');
+            $table->string('address');
+            $table->string('gps_code');
+            $table->enum('level', ['user', 'admin']);
             $table->timestamps();
         });
     }
