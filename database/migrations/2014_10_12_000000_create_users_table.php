@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('gps_code');
             $table->enum('level', ['user', 'admin']);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
