@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('gender', ['L', 'P']);
+            $table->enum('gender', ['L', 'P'])->nullable();
             $table->string('no_hp');
-            $table->string('address');
-            $table->string('gps_code');
+            $table->string('address')->nullable();
+            $table->string('gps_code')->nullable();
             $table->enum('level', ['user', 'admin']);
             $table->rememberToken();
             $table->timestamps();
