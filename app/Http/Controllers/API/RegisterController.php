@@ -15,7 +15,7 @@ class RegisterController extends BaseController
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'no_hp' => 'required|numeric|min:10',
-            'password' => 'required',
+            'password' => 'required|min:5',
             'c_password' => 'required|same:password',
         ]);
 
