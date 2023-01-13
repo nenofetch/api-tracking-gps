@@ -6,9 +6,6 @@ use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-// use App\Http\Requests\UserRequest;
-// use App\Http\Resources\UserCollection;
-// use App\Http\Resources\UserResource;
 use App\Models\User;
 use Validator;
 
