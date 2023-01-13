@@ -15,12 +15,15 @@ use App\Http\Controllers\API;
 |
 */
 
-Route::post('register', [API\RegisterController::class, 'register']);
-Route::post('login', [API\LoginController::class, 'login']);
-Route::post('logout', [API\LoginController::class, 'logout']);
-Route::apiResource('user', API\UserController::class);
-Route::apiResource('history', API\HistoryController::class);
-
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::post('register', [API\RegisterController::class, 'register']);
+Route::post('login', [API\LoginController::class, 'login']);
+Route::post('logout', [API\LoginController::class, 'logout']);
+
+Route::middleware('auth:api')->group( function () {
+    Route::apiResource('user', API\UserController::class);
+    Route::apiResource('history', API\HistoryController::class);
+});
