@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+use App\Models\History;
+use Validator;
 
-class HistoryController extends Controller
+class HistoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,8 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        //
+        $history = History::paginate(10);
+        return $this->sendResponse($history, 'The list has been displayed successfully');
     }
 
     /**
@@ -25,7 +30,20 @@ class HistoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'longtitude' => 'required',
+            'latitude' => 'required',
+        ]); 
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $input = $request->all();
+        $history = History::create($input);
+
+        return $this->sendResponse($history, 'Data has been successfully added');
     }
 
     /**
@@ -36,7 +54,9 @@ class HistoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $history = History::find($id);
+
+        return $this->sendResponse($history, 'Data has been successfully retrieved');
     }
 
     /**
@@ -46,9 +66,22 @@ class HistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, History $history)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'longtitude' => 'required',
+            'latitude' => 'required',
+        ]); 
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $input = $request->all();
+        $history->update($input);
+
+        return $this->sendResponse($history, 'Data has been successfully updated');
     }
 
     /**
@@ -57,8 +90,9 @@ class HistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(History $history)
     {
-        //
+        $history->delete();
+        return $this->sendResponse($history, 'Data has been successfully deleted');
     }
 }
