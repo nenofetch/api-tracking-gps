@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'address' => fake()->address(),
             'gps_code' => fake()->randomDigit(),
             'level' => fake()->randomElement(['user', 'admin']),
-            'remember_token' => Str::random(10),
+            // 'remember_token' => Str::random(10),
         ];
     }
 }
