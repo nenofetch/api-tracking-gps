@@ -25,5 +25,5 @@ Route::post('logout', [API\LoginController::class, 'logout']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('user', API\UserController::class);
-    Route::apiResource('history', API\HistoryController::class);
 });
+Route::apiResource('history', API\HistoryController::class);
