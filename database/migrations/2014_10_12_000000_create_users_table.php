@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('gps_code')->nullable();
             $table->enum('level', ['user', 'admin'])->default('user');
-            // $table->rememberToken();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
