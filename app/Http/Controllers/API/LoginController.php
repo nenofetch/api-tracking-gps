@@ -39,9 +39,4 @@ class LoginController extends BaseController
         $response = ['message' => 'You have been successfully logged out!.'];
         return response()->json($response, 200);
     }
-
-    protected function authenticated(Request $request, $user)
-    {
-        return redirect()->route('user.index');
-    }
 }
