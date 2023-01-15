@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\User;
 use Validator;
 
@@ -27,6 +28,7 @@ class RegisterController extends BaseController
         $input['password'] = bcrypt($input['password']);
         $input['remember_token'] = Str::random(10);
         $user = User::create($input);
+        $user->assignRole('User');
         $success['token'] = $user->createToken('TokenUser')->accessToken;
         $success['name'] = $user->name;
 
