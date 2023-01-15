@@ -23,7 +23,11 @@ Route::post('register', [API\RegisterController::class, 'register']);
 Route::post('login', [API\LoginController::class, 'login']);
 Route::post('logout', [API\LoginController::class, 'logout']);
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::middleware(['auth:api', 'role:admin'])->group(function () {
+    Route::apiResource('user', API\UserController::class);
+});
+
+Route::middleware(['auth:api', 'role:user'])->group(function () {
     Route::apiResource('user', API\UserController::class);
 });
 Route::apiResource('history', API\HistoryController::class);
