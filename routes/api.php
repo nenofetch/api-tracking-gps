@@ -15,19 +15,25 @@ use App\Http\Controllers\API;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::post('register', [API\RegisterController::class, 'register']);
-Route::post('login', [API\LoginController::class, 'login']);
-Route::post('logout', [API\LoginController::class, 'logout']);
+Route::post('login', [API\LoginController::class, 'login'])->name("login");
+// Route::post('logout', [API\LoginController::class, 'logout']);
 
-Route::middleware(['auth:api', 'role:admin'])->group(function () {
+
+Route::middleware('auth:login')->group(function () {
     Route::apiResource('user', API\UserController::class);
 });
 
-Route::middleware(['auth:api', 'role:user'])->group(function () {
-    Route::apiResource('user', API\UserController::class);
-});
+// Route::post('/user', function () {
+//     Route::apiResource('user', API\UserController::class);
+// })->middleware('auth:api');
+
+// Route::middleware(['auth:api', 'role:user'])->group(function () {
+//     Route::apiResource('user', API\UserController::class);
+// });
+
 Route::apiResource('history', API\HistoryController::class);
