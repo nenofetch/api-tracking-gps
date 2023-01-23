@@ -25,7 +25,10 @@ class LoginController extends BaseController
             $user = Auth::user();
             // $success['token'] = $user->createToken('TokenUser')->accessToken;
             $success['name'] = $user->name;
-            $success['token'] = $request->bearerToken();
+            $success['token'] = [
+                'Accept' => 'application/json',
+                'Authorization' => $request->bearerToken()
+            ];
 
 
             return $this->sendResponse($success, 'User login successfully.');
