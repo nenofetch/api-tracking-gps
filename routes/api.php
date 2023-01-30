@@ -20,7 +20,7 @@ Route::post('login', [API\LoginController::class, 'login']);
 // Route::post('logout', [API\LoginController::class, 'logout']);
 
 
-Route::middleware('auth:login')->group(function () {
+Route::middleware('auth:api')->group(function () {
     Route::middleware('role:user')->group(function () {
         Route::get('user/{id}', [API\UserController::class, 'show']);
         Route::put('user/{id}', [API\UserController::class, 'update']);
