@@ -29,7 +29,7 @@ class RegisterController extends BaseController
         $input['remember_token'] = Str::random(10);
         $user = User::create($input);
         $user->assignRole('User');
-        $success['token'] = $user->createToken('TokenUser')->accessToken;
+        $success['token'] = $user->createToken('Token User')->accessToken;
         $success['name'] = $user->name;
 
         return $this->sendResponse($success, 'User register successfully.');
