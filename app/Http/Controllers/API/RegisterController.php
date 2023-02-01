@@ -29,7 +29,7 @@ class RegisterController extends BaseController
         $input['remember_token'] = Str::random(10);
         $input['api_token'] = Str::random(100);
         $user = User::create($input);
-        $user->assignRole('User');
+        $user->assignRole('user');
         $success['token'] = $user->api_token;
         $success['name'] = $user->name;
 
