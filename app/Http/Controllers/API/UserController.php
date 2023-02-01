@@ -20,7 +20,6 @@ class UserController extends BaseController
     public function index()
     {
         $user = User::paginate(10);
-        // $user = auth()->user();
         return $this->sendResponse($user, 'The list has been displayed successfully');
     }
 

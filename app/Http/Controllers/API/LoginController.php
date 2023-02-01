@@ -21,9 +21,9 @@ class LoginController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = auth()->user();
-            $success['token'] = $user->createToken('Token User')->accessToken;
+            $success['token'] = $user->api_token;
             $success['name'] = $user->name;
 
 

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('gps_code')->nullable();
             // $table->enum('level', ['user', 'admin'])->default('user');
             $table->rememberToken();
+            $table->string('api_token')->nullable();
             $table->timestamps();
         });
     }

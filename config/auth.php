@@ -47,8 +47,7 @@ return [
         'login' => [
             'driver' => 'token',
             'provider' => 'users',
-
-        ]
+        ],
     ],
 
     /*

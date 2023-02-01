@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@cek.id',
             'password' => bcrypt('12345'),
             'remember_token' => Str::random(10),
+            'api_token' => Str::random(100),
         ]);
 
         $admin->assignRole('admin');
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
             'email' => 'user@cek.id',
             'password' => bcrypt('12345'),
             'remember_token' => Str::random(10),
+            'api_token' => Str::random(100),
         ]);
 
         $user->assignRole('user');
