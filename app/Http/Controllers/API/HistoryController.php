@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\History;
+use App\Models\User;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Validator;
 
 class HistoryController extends BaseController
@@ -30,20 +32,26 @@ class HistoryController extends BaseController
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'longtitude' => 'required',
-            'latitude' => 'required',
-        ]); 
+        $header = $request->header('Token');
+        $data = User::where('remember_token', $header)->first();
 
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+        if ($data) {
+            $validator = Validator::make($request->all(), [
+                'longtitude' => 'required',
+                'latitude' => 'required',
+            ]); 
+    
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+    
+            $input = $request->all();
+            $input['user_id'] = $data->id;
+            $history = History::create($input);
+            return $this->sendResponse($history, 'Data has been successfully added');
+        } else {
+            return $this->sendResponseErr('Data has been unsuccessfully added');
         }
-
-        $input = $request->all();
-        $history = History::create($input);
-
-        return $this->sendResponse($history, 'Data has been successfully added');
     }
 
     /**
