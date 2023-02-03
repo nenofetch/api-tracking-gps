@@ -15,3 +15,9 @@ jobs:
         server: ftp.solidproject.id
         username: tracking@solidproject.id
         password: tracking123
+        
+    - name: Install dependencies
+      uses: php-actions/composer@v6
+      with:
+        php_version: "8.1.2"
+        version: "2.2.6"
