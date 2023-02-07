@@ -1,4 +1,4 @@
-name: 🚀 Deploy website on push to hosting
+name: 🚀 Deploy project on push to hosting
 on: push
 
 jobs:
